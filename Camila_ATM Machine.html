@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ATM Program</title>
+  <!--Camila, Marc Allen -->
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+  
+    h1 {
+      margin-top: 0;
+      text-align: center;
+    }
+  
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+  
+    input[type="text"], input[type="number"] {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+  
+    button:hover {
+      background-color: #45a049;
+    }
+  
+    .balance {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  
+    .reset-btn {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Automated Teller Machine</h1>
+  
+  <div class="container">
+    <div class="balance" id="balance"></div>
+   <!--Camila, Marc Allen -->
+    <div>
+      <h3>Withdraw</h3>
+      <input type="number" id="withdrawAmount" placeholder="Enter amount" min="0" step="0.01">
+      <button onclick="withdraw()">Withdraw</button>
+    </div>
+  
+    <div>
+      <h3>Deposit</h3>
+      <input type="number" id="depositAmount" placeholder="Enter amount" min="0" step="0.01">
+      <button onclick="deposit()">Deposit</button>
+    </div>
+  
+    <div class="reset-btn">
+      <h3>Reset Balance</h3>
+      <button onclick="resetBalance()">Reset</button>
+    </div>
+  </div>
+  
+  <script>
+    // Initial balance
+    var initialBalance = 2500.00;
+    var balance = initialBalance;
+  
+    // Function to withdraw amount
+    function withdraw() {
+      var withdrawAmount = parseFloat(document.getElementById("withdrawAmount").value);
+      
+      if (isNaN(withdrawAmount) || withdrawAmount <= 0) {
+        alert("Invalid amount!");
+        return;
+      }
+  
+      if (withdrawAmount > balance) {
+        alert("Insufficient balance!");
+        return;
+      }
+  
+      balance -= withdrawAmount;
+      document.getElementById("withdrawAmount").value = "";
+      displayBalance();
+      alert("Withdrawal successful!");
+    }
+  
+    // Function to deposit amount
+    function deposit() {
+      var depositAmount = parseFloat(document.getElementById("depositAmount").value);
+      
+      if (isNaN(depositAmount) || depositAmount <= 0) {
+        alert("Invalid amount!");
+        return;
+      }
+  
+      balance += depositAmount;
+      document.getElementById("depositAmount").value = "";
+      displayBalance();
+      alert("Deposit successful!");
+    }
+  
+    // Function to reset balance
+    function resetBalance() {
+      balance = initialBalance;
+      displayBalance();
+      alert("Balance reset to $" + initialBalance.toFixed(2) + "!");
+    }
+  
+    // Function to display current balance
+    function displayBalance() {
+      document.getElementById("balance").innerHTML = "Current Balance: $" + balance.toFixed(2);
+    }
+  
+    displayBalance();
+  </script>
+   <!--Camila, Marc Allen -->
+</body>
+</html>
